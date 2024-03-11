@@ -1,6 +1,6 @@
 package jeu;
 
-public abstract class Couleur {
+public class Couleur {
     private String couleur;
 
     public Couleur() {
@@ -17,6 +17,18 @@ public abstract class Couleur {
 
     public void setBleu() {
         this.couleur = "bleu";
+    }
+
+    public boolean estBleu() {
+        return couleur.equals("bleu");
+    }
+
+    public boolean estRouge() {
+        return couleur.equals("rouge");
+    }
+
+    public boolean estNeutre() {
+        return couleur.equals("neutre");
     }
 
     public void setRouge() {

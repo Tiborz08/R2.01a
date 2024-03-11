@@ -1,6 +1,6 @@
 package jeu;
 
-public abstract class Guerrier {
+public abstract class Guerrier implements Comparable<Guerrier> {
     private int force;
     private int pointsDeVie;
     private static final int FORCE_BASE = 10;
@@ -8,14 +8,11 @@ public abstract class Guerrier {
     private static final int RESSOURCE_BASE = 1;
     private Chateau chateau;
 
-
     public Guerrier() {
         setForce(FORCE_BASE);
         setPointsDeVie(PV_MAX_BASE);
         this.chateau = null;
     }
-
-
     public int getForce() {
         return force;
     }
@@ -24,7 +21,7 @@ public abstract class Guerrier {
         return pointsDeVie;
     }
 
-    public void setPointsDeVie(int pointsDeVie) {
+    private void setPointsDeVie(int pointsDeVie) {
         this.pointsDeVie = pointsDeVie;
     }
 
@@ -49,7 +46,7 @@ public abstract class Guerrier {
     }
 
     public Couleur getCouleur() {
-        return Couleur.NEUTRE;
+        return chateau.getCouleur();
     }
 
     public void setChateau(Chateau chateau) {
@@ -57,15 +54,26 @@ public abstract class Guerrier {
     }
 
     public boolean estBleu() {
-        return couleur == Couleur.BLEU;
+        return chateau.estBleu();
     }
 
     public boolean estRouge() {
-        return couleur == Couleur.ROUGE;
+        return chateau.estRouge();
     }
 
     @Override
     public String toString() {
         return "[force=" + force + ", pointsDeVie=" + pointsDeVie + "]";
+    }
+
+    @Override
+    public int compareTo(Guerrier guerrier) {
+        if (this.getForce() > guerrier.getForce()) {
+            return 1;
+        } else if (this.getForce() < guerrier.getForce()) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

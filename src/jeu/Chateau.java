@@ -7,14 +7,18 @@ public class Chateau {
     private Couleur couleur;
     private Guerrier[] guerriersNovices;
 
+    private Plateau plateau;
+
     public Chateau(Couleur couleur) {
         this.ressources = RESSOURCES_INITIAL;
         this.couleur = couleur;
         this.guerriersNovices = new Guerrier[0];
+        this.plateau = new Plateau(10);
     }
 
     public void ajoutGuerrierNovice(Guerrier guerrier) {
-
+        // tableau ordonné
+        guerriersNovices[guerriersNovices.length] = guerrier;
     }
 
     public Guerrier[] getGuerriersNovices() {
@@ -22,10 +26,10 @@ public class Chateau {
     }
 
     public Guerrier[] entrainer() {
-        return null;
+        return guerriersNovices;
     }
 
-    public void incrementerRessources() {
+    private void incrementerRessources() {
         this.ressources += RESSOURCE_AJOUTEE_PAR_TOUR;
     }
 
@@ -34,10 +38,10 @@ public class Chateau {
     }
 
     public boolean estBleu() {
-        return couleur == ;
+        return couleur.estBleu() ;
     }
 
     public boolean estRouge() {
-        return couleur == Couleur.ROUGE;
+        return couleur.estRouge();
     }
 }
