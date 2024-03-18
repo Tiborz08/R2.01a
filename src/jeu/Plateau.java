@@ -30,7 +30,7 @@ public class Plateau {
     }
 
     public Couleur getGagnant() {
-        return carreaux[0].estRouge() ? new Couleur("rouge") : new Couleur("bleu");
+        return carreaux[0].estRouge() ? Couleur.ROUGE : Couleur.BLEU;
     }
 
     private Carreau getDepartBleu() {

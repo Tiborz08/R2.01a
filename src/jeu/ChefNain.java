@@ -8,4 +8,9 @@ public class ChefNain extends Nain {
         super.subirDegats(degats / 2);
     }
 
+    @Override
+    public int getCout() {
+        return super.getCout()*3;
+    }
+
 }

@@ -6,6 +6,8 @@ public abstract class Guerrier implements Comparable<Guerrier> {
     private static final int FORCE_BASE = 10;
     private static final int PV_MAX_BASE = 100;
     private static final int RESSOURCE_BASE = 1;
+
+    private static final int COUT_BASE = 1;
     private Chateau chateau;
 
     public Guerrier() {
@@ -15,6 +17,10 @@ public abstract class Guerrier implements Comparable<Guerrier> {
     }
     public int getForce() {
         return force;
+    }
+
+    public int getCout() {
+        return COUT_BASE;
     }
 
     public int getPointsDeVie() {
@@ -54,11 +60,12 @@ public abstract class Guerrier implements Comparable<Guerrier> {
     }
 
     public boolean estBleu() {
-        return chateau.estBleu();
+        // return chateau.estBleu();
+        return chateau.getCouleur().estBleu();
     }
 
     public boolean estRouge() {
-        return chateau.estRouge();
+        return chateau.getCouleur().estRouge();
     }
 
     @Override

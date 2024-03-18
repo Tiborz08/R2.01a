@@ -13,4 +13,9 @@ public class ChefElfe extends Elfe {
     public void setForce(int force) {
         this.force = super.getForce();
     }
+
+    @Override
+    public int getCout() {
+        return super.getCout()*2;
+    }
 }

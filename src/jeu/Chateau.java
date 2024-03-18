@@ -6,6 +6,10 @@ public class Chateau {
     private static final int RESSOURCE_AJOUTEE_PAR_TOUR = 1;
     private Couleur couleur;
     private Guerrier[] guerriersNovices;
+    private static final int COUT_BASE = 1;
+
+    private static final int COUT_CHEF_NAIN = 3;
+    private static final int COUT_CHEF_ELFE = 4;
 
     private Plateau plateau;
 
@@ -26,7 +30,7 @@ public class Chateau {
     }
 
     public Guerrier[] entrainer() {
-        return guerriersNovices;
+
     }
 
     private void incrementerRessources() {
@@ -35,13 +39,5 @@ public class Chateau {
 
     public Couleur getCouleur() {
         return couleur;
-    }
-
-    public boolean estBleu() {
-        return couleur.estBleu() ;
-    }
-
-    public boolean estRouge() {
-        return couleur.estRouge();
     }
 }

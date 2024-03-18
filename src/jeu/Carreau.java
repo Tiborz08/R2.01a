@@ -53,22 +53,28 @@ public class Carreau implements Comparable<Carreau> {
     }
 
     public boolean estRouge() {
-        return GuerriersRouges.length > GuerriersBleus.length;
+        return GuerriersRouges.length > 0 && GuerriersBleus.length == 0;
     }
 
     public boolean estBleu() {
-        return GuerriersBleus.length > GuerriersRouges.length;
+        return GuerriersBleus.length > 0 && GuerriersRouges.length == 0;
     }
 
     public boolean estChampDeBataille() {
-        return GuerriersBleus.length == GuerriersRouges.length;
+        return GuerriersBleus.length > 0 && GuerriersRouges.length > 0;
     }
 
     public void lanceCombat() {
         for (int i = 0; i < GuerriersBleus.length; i++) {
             for (int j = 0; j < GuerriersRouges.length; j++) {
                 GuerriersBleus[i].attaquer(GuerriersRouges[j]);
+                if (!GuerriersRouges[j].estVivant()) {
+                    supprimerGuerrier(GuerriersRouges[j]);
+                }
                 GuerriersRouges[j].attaquer(GuerriersBleus[i]);
+                if (!GuerriersBleus[i].estVivant()) {
+                    supprimerGuerrier(GuerriersBleus[i]);
+                }
             }
         }
     }
