@@ -4,7 +4,7 @@ public class TableDOperation {
     private Operation[] operations;
     private OperationEnum typeOperation;
 
-    private static final int NB_OPERATIONS = 10;
+    private static final int NB_OPERATIONS = 5;
 
     public TableDOperation(OperationEnum typeOperation) {
         this.typeOperation = typeOperation;
@@ -13,7 +13,7 @@ public class TableDOperation {
 
     private void initialisation() {
         for (int i = 0; i < NB_OPERATIONS; i++) {
-            operations[i] = typeOperation.getOperation(Math.random() * NB_OPERATIONS, Math.random() * NB_OPERATIONS);
+            operations[i] = typeOperation.getOperation(OperationUtilitaire.randomDouble(), OperationUtilitaire.randomDouble());
         }
     }
 

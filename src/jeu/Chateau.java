@@ -30,7 +30,7 @@ public class Chateau {
     }
 
     public Guerrier[] entrainer() {
-
+        return guerriersNovices;
     }
 
     private void incrementerRessources() {
