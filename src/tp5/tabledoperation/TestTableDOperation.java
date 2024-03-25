@@ -1,26 +1,31 @@
 package tp5.tabledoperation;
 
-import java.util.Scanner;
+import tp5.TestLogging;
 
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 public class TestTableDOperation {
+
+    private static Logger LOGGER = Logger.getLogger(TestLogging.class.getPackageName());
+
+    private static void demandeReponseUtilisateur(Operation operation, Scanner entree) {
+        // Affichage de l’opération
+        System.out.print(operation);
+        // Demander la réponse utilisateur
+        double reponseUtilisateur = entree.nextDouble();
+        entree.nextLine();
+        // Enregistrer la réponse utilisateur
+        try {
+            operation.setReponseUtilisateur(reponseUtilisateur);
+        } catch (ErreurOperationException e) {
+            System.out.println(e.getMessage());
+            demandeReponseUtilisateur(operation, entree);
+        }
+
+    }
     public static void main(String[] args) {
-//        Trace attendue : les réponses en rouge sont les entrées clavier de l’utilisateur. En gras, la
-//        gestion des erreurs de saisies (on redemande à l’utilisateur) :
-//        Addition 1 ou Soustraction 2 ou Multiplication 3 ? 4
-//        Merci de répondre par 1 ou 2 ou 3 ? 1
-//        Donner les réponses aux opérations :
-//        2.6 + 9.3 = 11.9
-//        7.5 + 18.3 = 25.8
-//        0.8 + 5.5 = 6.3
-//        10.8 + 8.6 = 19.4
-//        9.3 + 10.5 = 19.8
-//        Nombre de réponses justes : 5
-//        Compléter les différentes classes et méthodes pour obtenir des logs comme ci-après. Un log
-//        donne plusieurs indications, la classe et la méthode dont il est issue (<init> signifie
-//        constructeur) et bien sûr le niveau de log. On peut remarquer qu’un WARNING est remonté
-//        lorsque l’utilisateur a donné une mauvaise réponse (log obtenu dans la méthode
-//        getNombreDeReponsesJustes() de la classe TableDOperation). Vous pouvez ajouter
-//        d’autres logs pour vous aider.
 
         int choixOperation;
         Scanner scanner = new Scanner(System.in);
@@ -32,12 +37,43 @@ public class TestTableDOperation {
                 System.out.println("Merci de répondre par 1 ou 2 ou 3 ? ");
             }
         } while (choixOperation < 1 || choixOperation > 3);
+
+        OperationEnum typeOperation;
+
+        if (choixOperation == 1) {
+            typeOperation = OperationEnum.ADDITION;
+        } else if (choixOperation == 2) {
+            typeOperation = OperationEnum.SOUSTRACTION;
+        } else {
+            typeOperation = OperationEnum.MULTIPLICATION;
+        }
+        LOGGER.log(Level.INFO, "Type d'opération : " + typeOperation.toString());
+
+        System.out.println("Mode sans erreur true ou false ? ");
+
+        String modeSansErreur;
+
+        do {
+            modeSansErreur = scanner.nextLine();
+            if (!Objects.equals(modeSansErreur, "true") && !Objects.equals(modeSansErreur, "false")) {
+                System.out.println("Merci de répondre par true ou false ? ");
+            }
+        } while (!Objects.equals(modeSansErreur, "true") && !Objects.equals(modeSansErreur, "false"));
+
+        LOGGER.log(Level.INFO, "Mode sans erreur : " + modeSansErreur);
+        boolean boolMode;
+        if (Objects.equals(modeSansErreur, "true")) {
+            boolMode = true;
+        } else {
+            boolMode = false;
+        }
         System.out.println("Donner les réponses aux opérations : ");
-        TableDOperation tableDOperation = new TableDOperation(OperationEnum.ADDITION);
+
+        TableDOperation tableDOperation = new TableDOperation(typeOperation, boolMode);
 
         System.out.println("Nombre d'opérations : " + tableDOperation.getNbOperations());
         for (int i = 0; i < tableDOperation.getNbOperations(); i++) {
-            System.out.println(tableDOperation.getOperation(i));
+            demandeReponseUtilisateur(tableDOperation.getOperation(i), scanner);
         }
         System.out.println("Nombre de réponses justes : " + tableDOperation.getNbReponsesJustes());
     }
